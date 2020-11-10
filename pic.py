@@ -9,5 +9,6 @@ class imgManipulate:
         if save:
             img.save(pathSave)
         else:
+            #test
             pass
         return img
