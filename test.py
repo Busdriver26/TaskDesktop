@@ -1,14 +1,8 @@
-a = [1,2,2,3]
-b = [5,5,6,7]
-temp = []
-for i in a:
-    if i not in temp:
-        temp.append(i)
-a = temp
-temp = []
-for i in b:
-    if i not in temp:
-        temp.append(i)
-b = temp
-print(a,b)
-#check github
+import re
+c="2020-10-33"
+a = re.compile("(^((19|20)\d\d)-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$)")
+b = a.findall(c)
+if(len(b)>0):
+    print(b[0][0])
+else:
+    print("INVALID:"+c)

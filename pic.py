@@ -8,7 +8,4 @@ class imgManipulate:
         draw.text((left, top), text, text_color, font=fontStyle)
         if save:
             img.save(pathSave)
-        else:
-            #test
-            pass
         return img
