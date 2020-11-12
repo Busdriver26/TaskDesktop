@@ -62,14 +62,17 @@ class readWriteJson:
         with open(path,'r',encoding='utf-8') as loadF:
             loadDict = json.load(loadF)
             jsTask = loadDict["Tasks"] #一个字典的列表
+            try:
+                jsTask.remove({})
+            except:
+                pass
             jsTask = sorted(jsTask,key = self.tempTimeClass.timeKey)
             storeDict = {"Tasks":jsTask}
-            print(storeDict)
         with open(path,'w',encoding='utf-8') as loadF:
             json.dump(storeDict,loadF,ensure_ascii=False,indent=4)
         return
 
-    def deleteDat(self,task,path="dat/dat.json"):
+    def deleteDat(self,task,path="dat/dat.json",deleteAllInTime = False):
         inputTime = task["Time"]
         job = task["Job"]
         os.chdir(os.path.dirname(sys.argv[0]))
@@ -79,9 +82,16 @@ class readWriteJson:
             jsTask = loadDict["Tasks"]
             for tsk in jsTask:
                 if tsk["Time"] == inputTime:
-                    tsk["Job"].remove(job)
+                    if deleteAllInTime:
+                        tsk.clear()
+                        break
+                    else:
+                        tsk["Job"].remove(job)
+            if deleteAllInTime:
+                del tsk
+            storeDict = {"Tasks":jsTask}
         with open(path,'w',encoding='utf-8') as loadF:
-            json.dump(loadDict,loadF,ensure_ascii=False,indent=4)
+            json.dump(storeDict,loadF,ensure_ascii=False,indent=4)
         self.sortDat(path)
         return
 

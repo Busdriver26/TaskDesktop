@@ -5,5 +5,6 @@ a = rwj()
 b = a.readDat()
 t = tm()
 
-ino = {"Time":"2020-1-3","Job":"打一顿江宇轩"}
-a.deleteDat(ino)
+ino = {"Time":"2020-1-3","Job":"打一顿江33宇轩"}
+#a.inputDat(ino)
+a.deleteDat(ino,deleteAllInTime=True)
