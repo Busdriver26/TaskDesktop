@@ -1,10 +1,13 @@
 import json
 import os,sys
+from timeM import timeMethods as tm
 
 class readWriteJson:
     #这里返回的、录入的、删除的统一格式都是字典
     #插入的task:每天一个列表
     #插入时：字符串
+    tempTimeClass = tm()
+
     def test(self,path = "dat/dat.json"):
         os.chdir(os.path.dirname(sys.argv[0]))
         os.getcwd()
@@ -50,6 +53,20 @@ class readWriteJson:
         with open(path,'w',encoding='utf-8') as loadF:
             json.dump(loadDict,loadF,ensure_ascii=False,indent=4)
         self.deleteRepeat(path)
+        self.sortDat(path)
+        return
+
+    def sortDat(self,path = "dat/dat.json"):
+        os.chdir(os.path.dirname(sys.argv[0]))
+        os.getcwd()
+        with open(path,'r',encoding='utf-8') as loadF:
+            loadDict = json.load(loadF)
+            jsTask = loadDict["Tasks"] #一个字典的列表
+            jsTask = sorted(jsTask,key = self.tempTimeClass.timeKey)
+            storeDict = {"Tasks":jsTask}
+            print(storeDict)
+        with open(path,'w',encoding='utf-8') as loadF:
+            json.dump(storeDict,loadF,ensure_ascii=False,indent=4)
         return
 
     def deleteDat(self,task,path="dat/dat.json"):
@@ -65,6 +82,7 @@ class readWriteJson:
                     tsk["Job"].remove(job)
         with open(path,'w',encoding='utf-8') as loadF:
             json.dump(loadDict,loadF,ensure_ascii=False,indent=4)
+        self.sortDat(path)
         return
 
     def deleteRepeat(self,path="dat/dat.json"):
@@ -82,5 +100,3 @@ class readWriteJson:
         with open(path,'w',encoding='utf-8') as loadF:
             json.dump(loadDict,loadF,ensure_ascii=False,indent=4)
         return
-
-a = {"Time": "2020-11-8","Job":"q22est1"}

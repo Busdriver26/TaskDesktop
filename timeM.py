@@ -29,9 +29,20 @@ class timeMethods:
             return False
         return True
 
+    def timeKey(self, task):
+        time1 = self.getTime(task["Time"])
+        return int(time1["year"])*10000+int(time1["month"])*100+int(time1["day"])
+
+    #输入是一个字典，<:-1,=:0,>:1
     def compare(self,task1,task2):
         time1 = self.getTime(task1["Time"])
         time2 = self.getTime(task2["Time"])
-
-a = timeMethods()
-print(a.checkTime("2020-11-1"))
+        if time1["year"]>time2["year"]:
+            return 1
+        if time1["month"]>time2["month"]:
+            return 1
+        if time1["day"]>time2["day"]:
+            return 1
+        if time1["day"] == time2["day"]:
+            return 0
+        return -1
