@@ -9,7 +9,7 @@ class readJsonAndDraw:
     teRw = rwj()
     teImp = imp()
     #draw的输入为字典项：{"Time":"YYYY-MM-DD","Job":["1","2","3",..]}
-    def drawTask(self,year= True,left=1000,top=500,lineHeight = 30,path="dat/dat.json",pathLoad="pic/black.png", pathSave="pic/bckgrnd.png"):
+    def drawTask(self,year= True,left=1000,top=500,lineHeight = 30,path="dat/dat.json",text_size=50,pathLoad="pic/black.png", pathSave="pic/bckgrnd.png"):
         try:
             data = self.teRw.readDat()
             outputT = ""
@@ -26,8 +26,8 @@ class readJsonAndDraw:
                     else:
                         outputT += time[5:]+"\t"+job+"\n\n"
             print("Drawing Tasks...")
-            self.teImp.imageAddText(outputT,left,top,text_size=40,pathLoad = pathLoad,pathSave = pathSave)
-            self.teImp.imageAddText(outputJ,left+300,top,text_size=40,pathLoad = pathSave,pathSave = pathSave)
+            self.teImp.imageAddText(outputT,left,top,text_size=text_size,pathLoad = pathLoad,pathSave = pathSave)
+            self.teImp.imageAddText(outputJ,left+300,top,text_size=text_size,pathLoad = pathSave,pathSave = pathSave)
             return pathSave
         except:
             pass
@@ -35,7 +35,7 @@ class readJsonAndDraw:
 
     # 思路：由于排版必须列输出，每一列是某周的某一天+7重复。
     # 本版本只放本日起至下月月底的日历（beta）
-    def drawCalendar(self,left=2500,top=500,lineHeight = 30,showdates = 30,path="dat/dat.json",pathLoad="pic/black.png", pathSave="pic/bckgrnd.png"):
+    def drawCalendar(self,left=2500,top=500,lineHeight = 30,showdates = 30,path="dat/dat.json",text_size=50,pathLoad="pic/black.png", pathSave="pic/bckgrnd.png",offset = 125):
         #try:
         temptm = tm()
         data = self.teRw.readDat()
@@ -89,12 +89,12 @@ class readJsonAndDraw:
         print("Drawing Calendar...")
         offset1 = 0
         for col in dates:
-            self.teImp.imageAddText(col,left+offset1,top,ttf ="ttf\SourceCodePro-Medium.ttf",text_size=40,pathLoad = pathSave,pathSave = pathSave,align = 'center')
-            offset1 += 100
+            self.teImp.imageAddText(col,left+offset1,top,ttf ="ttf\SourceCodePro-Medium.ttf",text_size=text_size,pathLoad = pathSave,pathSave = pathSave,align = 'center')
+            offset1 += offset
         offset1 = 0
         for col in dates_colored:
-            self.teImp.imageAddText(col,left+offset1,top,ttf ="ttf\SourceCodePro-Medium.ttf", text_size=40,text_color=(255, 255, 0),pathLoad = pathSave,pathSave = pathSave,align = 'center')
-            offset1 += 100
+            self.teImp.imageAddText(col,left+offset1,top,ttf ="ttf\SourceCodePro-Medium.ttf", text_size=text_size,text_color=(255, 255, 0),pathLoad = pathSave,pathSave = pathSave,align = 'center')
+            offset1 += offset
         offset1 = 0
         print("Done.")
         #except:

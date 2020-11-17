@@ -4,4 +4,4 @@ from draw import readJsonAndDraw
 
 r = readJsonAndDraw()
 r.drawTask()
-r.drawCalendar()
+r.drawCalendar(text_size=50,offset=125)
