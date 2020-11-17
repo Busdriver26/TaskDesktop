@@ -5,7 +5,7 @@ class imgManipulate:
         img = Image.open(pathLoad)
         draw = ImageDraw.Draw(img)
         fontStyle = ImageFont.truetype(ttf, text_size, encoding="utf-8")
-        draw.text((left, top), textToDraw, text_color, font=fontStyle)
+        draw.text((left, top), textToDraw, text_color, font=fontStyle,align = 'right')
         if save:
             img.save(pathSave)
         return img
