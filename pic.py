@@ -9,3 +9,4 @@ class imgManipulate:
         if save:
             img.save(pathSave)
         return img
+#
