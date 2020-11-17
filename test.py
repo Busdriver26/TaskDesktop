@@ -1,8 +1,7 @@
 from timeM import timeMethods as tm
 from rw import readWriteJson as rwj
+from draw import readJsonAndDraw
 
-time = "1234567"
-td = "123456"
-print(time+td)
-time = time+" "
-print(time+td)
+r = readJsonAndDraw()
+r.drawTask()
+r.drawCalendar()

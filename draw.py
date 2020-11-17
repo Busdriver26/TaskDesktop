@@ -25,6 +25,7 @@ class readJsonAndDraw:
                         outputJ += job+"\n"
                     else:
                         outputT += time[5:]+"\t"+job+"\n\n"
+            print("Drawing Tasks...")
             self.teImp.imageAddText(outputT,left,top,text_size=40,pathLoad = pathLoad,pathSave = pathSave)
             self.teImp.imageAddText(outputJ,left+300,top,text_size=40,pathLoad = pathSave,pathSave = pathSave)
             return pathSave
@@ -35,44 +36,66 @@ class readJsonAndDraw:
     # 思路：由于排版必须列输出，每一列是某周的某一天+7重复。
     # 本版本只放本日起至下月月底的日历（beta）
     def drawCalendar(self,left=2500,top=500,lineHeight = 30,showdates = 30,path="dat/dat.json",pathLoad="pic/black.png", pathSave="pic/bckgrnd.png"):
-        try:
-            temptm = tm()
-            data = self.teRw.readDat()
-            today = temptm.getTime(str(datetime.date.today()))
-            cal = TC()
-            #dates[i]的字符串就是周i+1的日期
-            dates = ["Mo\n","Tu\n","We\n","Th\n","Fr\n","Sa\n","Su\n"]
-            deadLine = []
-            for dat in data:
-                deadLine.append(temptm.getTime(dat["Time"]))
-            thisMonth = cal.monthdays2calendar(int(today["year"]), int(today["month"]))
-            if today["month"] == 12:
-                nextMonth = cal.monthdays2calendar(int(today["year"])+1, 1)
-            else:
-                nextMonth = cal.monthdays2calendar(int(today["year"]),int(today["month"])+1)
-            startFlag = 0
-            for week in thisMonth:
-                for days in week:
-                    if days[0]>=int(today["day"]):
-                        if days[0] == int(today["day"]):
-                            startFlag = 1
-                            tempWeekDay = days[1]
-                        if days[0] < int(today["day"]) + 7 and days[1]<tempWeekDay:
-                            dates[days[1]] += "\n"
-                        dates[days[1]] = dates[days[1]] + str(days[0]) + "\n"
-                    elif startFlag == 1: #当本月日期结束后退出
-                        break
-            for week in nextMonth:
-                for days in week:
-                    if(days[0]!=0):
-                        dates[days[1]] = dates[days[1]] + str(days[0]) + "\n"
-            offset1 = 0
-            for col in dates:
-                self.teImp.imageAddText(col,left+offset1,top,text_size=40,pathLoad = pathSave,pathSave = pathSave,align = 'center')
-                offset1 += 100
-        except:
-            pass
+        #try:
+        temptm = tm()
+        data = self.teRw.readDat()
+        today = temptm.getTime(str(datetime.date.today()))
+        cal = TC()
+        #dates[i]的字符串就是周i+1的日期
+        dates = ["Mo\n","Tu\n","We\n","Th\n","Fr\n","Sa\n","Su\n"]
+        dates_colored = ["Mo\n","Tu\n","We\n","Th\n","Fr\n","Sa\n","Su\n"]
+        deadLine = {}
+        for dat in data:
+            tempT = temptm.getTime(dat["Time"])
+            tempMonth = int(tempT["month"])
+            tempDay = int(tempT["day"])
+            if tempMonth not in deadLine:
+                deadLine[tempMonth] = []
+            deadLine[tempMonth].append(tempDay)
+        thisMonth = cal.monthdays2calendar(int(today["year"]), int(today["month"]))
+        if today["month"] == 12:
+            nextMonth = cal.monthdays2calendar(int(today["year"])+1, 1)
+        else:
+            nextMonth = cal.monthdays2calendar(int(today["year"]),int(today["month"])+1)
+        startFlag = 0
+        for week in thisMonth:
+            for days in week:
+                if days[0]>=int(today["day"]):
+                    if days[0] == int(today["day"]):
+                        startFlag = 1
+                        tempWeekDay = days[1]
+                    if days[0] < int(today["day"]) + 7 and days[1]<tempWeekDay:
+                        dates[days[1]] += "\n"
+                        dates_colored[days[1]] += "\n"
+                    dates[days[1]] = dates[days[1]] + str(days[0]) + "\n"
+                    if days[0] in deadLine[int(today["month"])]:
+                        dates_colored[days[1]] = dates_colored[days[1]] + str(days[0]) + "\n"
+                    else:
+                        dates_colored[days[1]]+="\n"
 
-r = readJsonAndDraw()
-r.drawTask()
-r.drawCalendar()
+                elif startFlag == 1: #当本月日期结束后退出
+                    break
+        monthNo = int(today["month"])+1
+        if monthNo>12:
+            monthNo = 1
+        for week in nextMonth:
+            for days in week:
+                if(days[0]!=0):
+                    dates[days[1]] = dates[days[1]] + str(days[0]) + "\n"
+                    if monthNo in deadLine and days[0] in deadLine[monthNo]:
+                        dates_colored[days[1]] = dates_colored[days[1]] + str(days[0]) + "\n"
+                    elif monthNo in deadLine:
+                        dates_colored[days[1]]+="\n"
+        print("Drawing Calendar...")
+        offset1 = 0
+        for col in dates:
+            self.teImp.imageAddText(col,left+offset1,top,text_size=40,pathLoad = pathSave,pathSave = pathSave,align = 'center')
+            offset1 += 100
+        offset1 = 0
+        for col in dates_colored:
+            self.teImp.imageAddText(col,left+offset1,top,text_size=40,text_color=(255, 255, 0),pathLoad = pathSave,pathSave = pathSave,align = 'center')
+            offset1 += 100
+        offset1 = 0
+        print("Done.")
+        #except:
+        #    EOFError("1")
