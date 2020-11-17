@@ -89,11 +89,11 @@ class readJsonAndDraw:
         print("Drawing Calendar...")
         offset1 = 0
         for col in dates:
-            self.teImp.imageAddText(col,left+offset1,top,text_size=40,pathLoad = pathSave,pathSave = pathSave,align = 'center')
+            self.teImp.imageAddText(col,left+offset1,top,ttf ="ttf\SourceCodePro-Medium.ttf",text_size=40,pathLoad = pathSave,pathSave = pathSave,align = 'center')
             offset1 += 100
         offset1 = 0
         for col in dates_colored:
-            self.teImp.imageAddText(col,left+offset1,top,text_size=40,text_color=(255, 255, 0),pathLoad = pathSave,pathSave = pathSave,align = 'center')
+            self.teImp.imageAddText(col,left+offset1,top,ttf ="ttf\SourceCodePro-Medium.ttf", text_size=40,text_color=(255, 255, 0),pathLoad = pathSave,pathSave = pathSave,align = 'center')
             offset1 += 100
         offset1 = 0
         print("Done.")
