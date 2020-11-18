@@ -17,5 +17,6 @@ class setWallPaper:
         abspath = os.path.abspath(imagepath)
         sysParametersInfo = self.getSysParametersInfo()
         r = sysParametersInfo(20, 0, abspath, 3)
+        print("Changing Wall Paper Done.")
         if not r:
             print(ctypes.WinError())

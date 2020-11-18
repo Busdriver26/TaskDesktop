@@ -26,3 +26,4 @@ def deleteDat(self,task,path="dat/dat.json"):
 def deleteRepeat(self,path="dat/dat.json"):
 ```
 
+图像大小：4000*2250（目前必须是）

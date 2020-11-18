@@ -4,4 +4,4 @@ from draw import readJsonAndDraw
 from maintain import maintain as mt
 
 temp = mt()
-temp.update(img="pic/black.png")
+temp.update(img="pic/nick-nice-gPm8h3DS1s4-unsplash.jpg")

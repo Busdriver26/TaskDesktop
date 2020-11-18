@@ -113,6 +113,8 @@ class readJsonAndDraw:
                             dates_colored[days[1]]+="\n"
             print("Drawing Calendar...")
             offset1 = 0
+            #为了刷新录入的文件名
+            self.teImp.imageAddText("",0,0,pathLoad = pathLoad,pathSave = pathSave)
             for col in dates:
                 self.teImp.imageAddText(col,left+offset1,top,ttf ="ttf\SourceCodePro-Medium.ttf",text_size=text_size,pathLoad = pathSave,pathSave = pathSave,align = 'center')
                 offset1 += offset
