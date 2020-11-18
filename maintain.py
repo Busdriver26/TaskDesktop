@@ -17,7 +17,7 @@ class maintain:
     def update(self):
         self.tempRJAD.drawTask()
         self.tempRJAD.drawCalendar()
-        self.tempSWP.change_wallpaper("pic/bckgrnd.png")
+        self.tempSWP.changeWallPaper("pic/bckgrnd.png")
         return
 
 

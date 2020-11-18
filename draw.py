@@ -28,9 +28,10 @@ class readJsonAndDraw:
             print("Drawing Tasks...")
             self.teImp.imageAddText(outputT,left,top,text_size=text_size,pathLoad = pathLoad,pathSave = pathSave)
             self.teImp.imageAddText(outputJ,left+300,top,text_size=text_size,pathLoad = pathSave,pathSave = pathSave)
+            print("Drawing Tasks Done.")
             return pathSave
         except:
-            pass
+            print("Error: Drawing Task Failed.")
             return
 
     def drawFinTask(self,year= True,left=1000,top=500,lineHeight = 30,path="dat/fin.json",text_size=50,pathLoad="pic/black.png", pathSave="pic/bckgrnd.png"):
@@ -52,9 +53,10 @@ class readJsonAndDraw:
             print("Drawing Finished Tasks...")
             self.teImp.imageAddText(outputT,left,top,text_size=text_size,pathLoad = pathLoad,pathSave = pathSave)
             self.teImp.imageAddText(outputJ,left+300,top,text_size=text_size,pathLoad = pathSave,pathSave = pathSave)
+            print("Drawing Finished Tasks Done.")
             return pathSave
         except:
-            pass
+            print("Error: Drawing Finished Task Failed.")
             return
     # 思路：由于排版必须列输出，每一列是某周的某一天+7重复。
     # 本版本只放本日起至下月月底的日历（beta）
@@ -119,6 +121,6 @@ class readJsonAndDraw:
                 self.teImp.imageAddText(col,left+offset1,top,ttf ="ttf\SourceCodePro-Medium.ttf", text_size=text_size,text_color=(255, 255, 0),pathLoad = pathSave,pathSave = pathSave,align = 'center')
                 offset1 += offset
             offset1 = 0
-            print("Done.")
+            print("Drawing Calendar Done.")
         except:
-            EOFError("1")
+            print("Error: Drawing Calendar Failed.")
