@@ -30,6 +30,25 @@ class readWriteJson:
                     return loadDict
         return 0
 
+    def searchDat(self,task,path = "dat/dat.json"):
+        os.chdir(os.path.dirname(sys.argv[0]))
+        os.getcwd()
+        if self.test():
+            with open(path,'r',encoding='utf-8') as loadF:
+                loadDict = json.load(loadF)
+                time = task["Time"]
+                job = task["Job"]
+                jsTask = loadDict["Tasks"]
+                allTime = [i["Time"] for i in jsTask]
+                if time not in allTime:
+                    return False
+                for i in jsTask:
+                    if time == i["Time"]:
+                        for j in i["Job"]:
+                            if j == job:
+                                return True
+                return False
+
     #这里的task input为字符串
     def inputDat(self,task,path="dat/dat.json"):
         inputTime = task["Time"]
