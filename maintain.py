@@ -14,10 +14,10 @@ class maintain:
         self.tempRW.inputDat(task,path="dat/fin.json")
         return
 
-    def update(self):
-        self.tempRJAD.drawTask()
-        self.tempRJAD.drawCalendar()
-        self.tempSWP.changeWallPaper("pic/bckgrnd.png")
+    def update(self,img):
+        tempPic = self.tempRJAD.drawTask(pathLoad=img)
+        tempPic = self.tempRJAD.drawCalendar(pathLoad=tempPic)
+        self.tempSWP.changeWallPaper(tempPic)
         return
 
 

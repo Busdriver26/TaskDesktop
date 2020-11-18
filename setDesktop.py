@@ -12,7 +12,8 @@ class setWallPaper:
         return ctypes.windll.user32.SystemParametersInfoW if self.is_64_windows() \
             else ctypes.windll.user32.SystemParametersInfoA
 
-    def changeWallPaper(self,imagepath):
+    def changeWallPaper(self,imagepath = "pic/bckgrnd.png"):
+        print("Changing Wall Paper...")
         abspath = os.path.abspath(imagepath)
         sysParametersInfo = self.getSysParametersInfo()
         r = sysParametersInfo(20, 0, abspath, 3)

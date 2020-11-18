@@ -122,5 +122,6 @@ class readJsonAndDraw:
                 offset1 += offset
             offset1 = 0
             print("Drawing Calendar Done.")
+            return pathSave
         except:
             print("Error: Drawing Calendar Failed.")
