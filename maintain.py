@@ -19,6 +19,4 @@ class maintain:
         tempPic = self.tempRJAD.drawCalendar(pathLoad=tempPic)
         self.tempSWP.changeWallPaper(tempPic)
         return
-
-
-
+        

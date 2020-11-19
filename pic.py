@@ -1,5 +1,4 @@
 from PIL import Image, ImageDraw, ImageFont
-import numpy as np
 class imgManipulate:
     def imageAddText(self,textToDraw, left, top,align = 'left' ,text_color=(255, 255, 255), text_size=70, pathLoad="pic/black.png", save=True, pathSave="pic/bckgrnd.png",ttf="ttf/Deng.ttf"):
         img = Image.open(pathLoad)
