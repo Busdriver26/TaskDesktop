@@ -15,6 +15,7 @@ class maintain:
         return
 
     def update(self,img):
+        self.tempRW.sortDat()
         tempPic = self.tempRJAD.drawTask(pathLoad=img)
         tempPic = self.tempRJAD.drawCalendar(pathLoad=tempPic)
         self.tempSWP.changeWallPaper(tempPic)
