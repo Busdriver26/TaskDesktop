@@ -103,9 +103,13 @@ class readJsonAndDraw:
             monthNo = int(today["month"])+1
             if monthNo>12:
                 monthNo = 1
+            _,daysInMonth = calendar.monthrange(int(today["year"]), int(today["month"]))
             for week in nextMonth:
                 for days in week:
                     if(days[0]!=0):
+                        if days[0] < int(today["day"]) + 7 - daysInMonth and days[1]<tempWeekDay:
+                            dates[days[1]] += "\n"
+                            dates_colored[days[1]] += "\n"
                         dates[days[1]] = dates[days[1]] + str(days[0]) + "\n"
                         if monthNo in deadLine and days[0] in deadLine[monthNo]:
                             dates_colored[days[1]] = dates_colored[days[1]] + str(days[0]) + "\n"
