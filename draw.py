@@ -78,7 +78,7 @@ class readJsonAndDraw:
                 deadLine[tempMonth] = []
             deadLine[tempMonth].append(tempDay)
         thisMonth = cal.monthdays2calendar(int(today["year"]), int(today["month"]))
-        if today["month"] == 12:
+        if today["month"] == "12":
             nextMonth = cal.monthdays2calendar(int(today["year"])+1, 1)
         else:
             nextMonth = cal.monthdays2calendar(int(today["year"]),int(today["month"])+1)
